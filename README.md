@@ -170,5 +170,3 @@ git clone inv4://0 clonado
 ```
 
 Ahora puedes navegar dentro de este repositorio clonado y verificar que es el mismo que has empujado.
-
-Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
