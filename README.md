@@ -81,3 +81,94 @@ git clone inv4://0 cloned
 ```
 
 Now you can navigate inside this cloned repo and verify that it's the same as the one you pushed!
+
+##Español
+# git-remote-inv4
+Un ayudante de Git que integra INV4 con el protocolo Git.
+
+## Instalación
+Asegúrate de que ya tienes instalados `cargo` y `rust`. Entonces:
+``sh
+cargo install --git https://github.com/InvArch/INV4-Git
+```
+El binario se instalará en `~/.cargo/bin/` como `git-remote-inv4`.
+
+## Pruebas
+Las pruebas requieren ejecutar un nodo IPFS, ejecutar un nodo InvArch local y crear un IP Set en él.
+
+### Ejecutando el nodo IPFS local:
+Instala el binario ipfs cli desde un gestor de paquetes, o sigue las instrucciones de la [documentación de IPFS](http://docs.ipfs.tech.ipns.localhost:8080/install/command-line/#linux) para conseguir instalar el binario en tu sistema.
+
+Después de instalar la herramienta IPFS cli, abre un terminal y ejecuta los siguientes comandos:
+``sh
+ipfs init
+ipfs daemon
+```
+Ahora aparta ese terminal, ejecutará el nodo IPFS hasta que lo mates manualmente o cierres el terminal.
+
+Para poder ejecutar la construcción del nodo necesitaras tener instaladas las herramientas de wasm lo puedes hacer ubicándote en el path de la aplicación y corriendo el siguiente comando:
+```
+rustup target add wasm32-unknown-unknown
+```
+
+### Ejecutando el nodo local InvArch:
+En una nueva terminal, ejecute lo siguiente:
+``sh
+git clone https://github.com/InvArch/InvArch-Node
+cd InvArch-Node
+make build
+make run-solo-alice
+```
+
+Ahora que has construido el binario del nodo y esa terminal está ejecutando un collator, abre una segunda terminal en la misma ubicación, y ejecuta otro collator con el siguiente comando
+``sh
+make run-solo-bob
+```
+
+Un nodo de desarrollo comenzará a ejecutarse y debería ser accesible desde `ws://127.0.0.1:9944` (o directamente en polkadot.js en https://polkadot.js.org/?rpc=ws://127.0.0.1:9944)
+Ahora también puedes poner estos terminales a un lado.
+
+### Envío de tokens a tu cuenta
+Vas a necesitar una cuenta para la cual tengas la frase semilla a mano, puedes crear una nueva cuenta para esto.
+Para enviar tokens a esa cuenta, sigue estos pasos:
+1. Ve a esta página en polkadot.js: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/accounts
+2. En las pestañas, pasa el ratón por encima de la pestaña de cuentas y haz clic en transferir, como se muestra en la imagen: ![](images/tabs.png)
+3. Selecciona Alice como cuenta remitente en el primer campo.
+4. Pega tu cuenta en el segundo campo y una cantidad arbitraria en el tercero, 100 en el caso del ejemplo: ![](images/transfer.png)
+5. Haga clic en el botón de realizar la transferencia y confirme la transacción.
+
+### Creación del conjunto de IP
+1. Abrir la extrínseca prefabricada en polkadot.js utilizando la siguiente URL: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/extrinsics/decode/0x470038676974207265706f7369746f72790000010132010000
+2. Vaya a la pestaña de presentación: ![](images/submission_tab.png)
+3. Envíe la transacción utilizando la cuenta a la que envió los tokens.
+
+Se debería haber creado un conjunto de IP con el ID `0`.
+
+### Usando la herramienta
+Usando un terminal, navega a un directorio donde crearás un nuevo repositorio git y ejecuta los siguientes comandos (considerando que estás en Linux)
+ ``sh
+mkdir test-repo
+cd test-repo
+touch archivo-prueba
+echo test > test-file
+git init
+git remote add origen inv4://0
+git add *
+git commit -m "¡Primer commit!"
+```
+
+Este siguiente comando enviará tus archivos a la cadena, te pedirá tu frase semilla, sólo pégala en la terminal y presiona Enter:
+```sh
+git push origin master
+```
+
+Ahora has creado un nuevo repositorio git local, has añadido algunos archivos, has enlazado con el IPS que has creado en la cadena y has enviado tu commit local a la cadena.
+
+Para demostrar que realmente está en la cadena, ve a un nuevo directorio y clona el repositorio git de la cadena usando el siguiente comando:
+``sh
+git clone inv4://0 clonado
+```
+
+Ahora puedes navegar dentro de este repositorio clonado y verificar que es el mismo que has empujado.
+
+Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
