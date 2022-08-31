@@ -97,7 +97,7 @@ El binario se instalará en `~/.cargo/bin/` como `git-remote-inv4`.
 Las pruebas requieren ejecutar un nodo IPFS, ejecutar un nodo InvArch local y crear un IP Set en él.
 
 ### Ejecutando el nodo IPFS local:
-Instala el binario ipfs cli desde un gestor de paquetes, o sigue las instrucciones de la [documentación de IPFS](http://docs.ipfs.tech.ipns.localhost:8080/install/command-line/#linux) para conseguir instalar el binario en tu sistema.
+Instala el binario ipfs cli desde un gestor de paquetes, o sigue las instrucciones de la [documentación de IPFS]([http://docs.ipfs.tech.ipns.localhost:8080/install/command-line/#linux](https://docs.ipfs.tech/install/command-line/#official-distributions)) para conseguir instalar el binario en tu sistema.
 
 Después de instalar la herramienta IPFS cli, abre un terminal y ejecuta los siguientes comandos:
 ``sh
